@@ -1,6 +1,3 @@
-# This function returns a list of skills.
-# This is the list that the user will choose from
-# Add at least 3 random skills for the user to select from
 skills = ["Python", "C++", "Javascript", "Juggling", "Running", "Eating"]
 cv= {}
 def get_skills():
@@ -43,30 +40,51 @@ def get_user_skills(skills):
 # HINT: Use previous built functions to get the skills from the user
 def get_user_cv(skills):
       cv= {}
-      name=input("please enter your name:")
-      cv["name"] = name
-      age=input("please enter your age:")
-      cv["age"]= age 
+      
+      cv["name"] = input("please enter your name:")
+      cv["age"]= input("please enter your age:")
       exp=int(input("please enter how many yesrs of experience you have:"))
       cv["experience"]=exp 
       show_skills(skills)
       cv["skills"]=[]
        
       cv["skills"].append(get_user_skills(skills))
-      print(cv) 
-
+      # print(cv) 
+      return cv
 # This functions checks if the cv is acceptable or not, by checking the age, experience and skills and return a boolean (True or False) based on that
 def check_acceptance(cv, desired_skill):
-  ...
+  # c={}
+  # c.update(get_user_cv(skills))
+  # print(c)
+   
+   age=int(cv["age"])
+   if age>=20  and cv.get("experience") > 2 and desired_skill not in cv["skills"]:
+    return True
+   else:
+    return False
+  
 
 
 def main():
     # Write your main logic here by combining the functions above into the
     # desired outcome
     print("Welcome to the recruitment program, please answer the following questions:")
-    get_user_cv(skills)
+    # ch=check_acceptance(cv,"Python")
+    # if ch == True:
+    #   print(f"you have been accepted")
+    # else:
+    #   print("You have been rejected")
     
-  #   print(f"you have been accepted,{cv.get("name")")
-
+    c={}
+    c.update(get_user_cv(skills))
+    ch = check_acceptance(c, "Python")
+    name=c["name"]
+   
+    if ch:
+        print(f"You have been accepted:",name)
+    else:
+        print(f"You have been rejected:",name)
+    #print(f"you have been accepted,{cv.get("name")")
+    
 if __name__ == "__main__":
     main()
